@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Films from "../pages/Films";
-// import Seats from "../pages/Seats";
+import Seats from "../pages/Seats";
 import Sessions from "../pages/Sessions";
 import NavBar from "./NavBar"
 import GlobalStyle from "../globalStyles"
@@ -14,7 +14,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Films/>}/>
       <Route path="/sessions/" element={<Sessions/>}/>
-      {/* <Route path="/seats/:idSession" element={<Seats/>}/> */}
+      {/* :idFilm */}
+      {/* :idSession */}
+      <Route path="/seats/" element={<Seats/>}/>
 
     </Routes>
     </BrowserRouter>
