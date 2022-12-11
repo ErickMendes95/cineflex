@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
+import Footer from "../components/Footer"
 
 export default function Films(){
 
@@ -18,11 +20,13 @@ export default function Films(){
     return (
         <Container>
             <Text>
-                <h1>Selecione o Filme</h1>
+            <h1>Selecione o Filme</h1>
             </Text>
             <Image>
                 {films.map(f => 
-                    <img src={f.posterURL} alt="#"/>
+                <Link to={`/sessions/${f.title}`}>
+                    <img src={f.posterURL} alt={f.title}/>
+                </Link>
                     )}
             </Image>
         </Container>
@@ -48,7 +52,7 @@ h1{
 `
 
 const Image = styled.div`
-    
+
     img{
         width: 129px;
         height: 193px;
