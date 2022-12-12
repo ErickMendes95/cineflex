@@ -1,34 +1,40 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 
 export default function Sessions(){
+    const [filmSessions, setFilmSessions] = useState(undefined)
+    const { idFilm } = useParams()
+    useEffect(() => {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilm}/showtimes`)
+        promise.then(res => setFilmSessions(res.data))
+        // promise.catch(err => console.log(err.response.data))
+
+    }, [])
+if(filmSessions === undefined){
+    return <div>Carregando...</div>
+}
     return (
         <Container>
             <Text>
                 <h1>Selecione a Sessão</h1>
             </Text>
-            <Session>
-                <Text>
-                <p>Quinta-Feira</p>
-                </Text>
-                <Buttons>
-                    <button>15:00</button>
-                    <button>16:00</button>
-                </Buttons>
-
-            </Session>
-            <Session>
-            <Text>
-                <p>Sexta-Feira</p>
-                </Text>
-                <Buttons>
-                    <button>15:00</button>
-                    <button>16:00</button>
-                </Buttons>
-            </Session>
-            <Footer/>
+            {filmSessions.days.map((d) => 
+                <Session>
+                    <Text>
+                        <p>{d.weekday} - {d.date}</p>
+                    </Text>
+                    <Buttons>
+                        {d.showtimes.map((ds) => 
+                                 <button>{ds.name}</button>
+                                 )}
+                    </Buttons>
+                 </Session>
+            )}
+            
+            <Footer image={filmSessions.posterURL} title={filmSessions.title}/>
         </Container>)
 }
 
@@ -47,11 +53,11 @@ const Text = styled.div`
 h1{
     font-weight: 400;
     font-size: 24px;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 p{
     font-size: 20px;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 `
 
@@ -68,8 +74,8 @@ const Buttons = styled.div`
         font-size: 18px;
         color: #fff;
         background: #E8833A;
-        width: 83px;
-        height: 43px;
+        width: 70px;
+        height: 33px;
         cursor: pointer;
         border: none;
         border-radius: 5px;

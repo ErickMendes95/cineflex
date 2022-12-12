@@ -1,14 +1,14 @@
 import { useState } from "react"
 import styled from "styled-components"
 
-export default function Footer(){
+export default function Footer({title, session, image}){
 
     return(
         <FooterContainer>
-            <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="#"/>
+            <img src={image} alt="#"/>
             <Text>
-            <h1>Titulo Filme</h1>
-            <h1>Sessão</h1>
+            <h1>{title}</h1>
+            <h1>{session}</h1>
             </Text>
 
         </FooterContainer>
@@ -31,6 +31,7 @@ margin-left: 20px;
 img {
     width: 48px;
     height: 72px;
+    margin-right: 10px;
 }
 h1{
     color: #293845;

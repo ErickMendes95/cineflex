@@ -13,7 +13,7 @@ function App() {
     <NavBar/>
     <Routes>
       <Route path="/" element={<Films/>}/>
-      <Route path="/sessions/" element={<Sessions/>}/>
+      <Route path="/sessions/:idFilm" element={<Sessions/>}/>
       {/* :idFilm */}
       {/* :idSession */}
       <Route path="/seats/" element={<Seats/>}/>
