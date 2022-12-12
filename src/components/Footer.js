@@ -23,10 +23,12 @@ width: 375px;
 gap: 10px;
 align-items: center;
 color: #E8833A;
+background: #DFE6ED;
+border: 1px solid #9EADBA
 position: fixed;
 left: 0;
-bottom: 0;  
-margin-left: 20px;
+bottom: 0;
+padding: 10px;  
 img {
     width: 48px;
     height: 72px;

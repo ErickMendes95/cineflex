@@ -4,8 +4,10 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 
-export default function Seats(){
-    
+export default function Seats({arraySeats, setArraySeats}){
+    let navigate = useNavigate();
+    let index = "";
+
     const [infoSession, setInfoSession] = useState(undefined)
     const { idSession } = useParams()
     
@@ -20,11 +22,22 @@ export default function Seats(){
     }
     
     function buttonSelector(e){
-        console.log(e.target)
         if(e.target.value === "false"){
             alert("Esse assento não está disponível")
         }
-        
+        if(e.target.value === "true"){
+            if(!(arraySeats.includes(e.target.id))){
+                setArraySeats([...arraySeats, e.target.id])
+                console.log(arraySeats)
+            } else if(arraySeats.includes(e.target.id)) {
+                index = arraySeats.indexOf(e.target.id)
+                console.log(index)
+                
+                
+            }
+
+
+        }
     }
 
     function buySeats(e){
@@ -38,8 +51,8 @@ export default function Seats(){
             </Text>
             <SeatsContainer>
                 {infoSession.seats.map((s) => 
-                    <Button key={s.id} id={s.id} isAvailable={!(s.isAvailable)}>
-                        <button value={s.isAvailable} onClick={(e) => buttonSelector(e)}>
+                    <Button key={s.id}  isAvailable={!(s.isAvailable)}>
+                        <button  id={s.id} name={s.name} value={s.isAvailable} onClick={(e) => buttonSelector(e)}>
                             {s.name}
                         </button>
                     </Button>
@@ -102,7 +115,7 @@ const SeatsContainer = styled.div`
     width : 90%;
     margin: 10px 0 10px 15px;
     button{
-        margin-right: 10px;
+        margin-right: 5px;
         margin-bottom: 20px;
         background: #C3CFD9;
         width: 26px;
@@ -116,7 +129,6 @@ const SeatsContainer = styled.div`
 
 const Button = styled.div`
     button{
-    color: black;
     background: ${props => props.isAvailable ? '#FBE192' : '#C3CFD9'};
     }
 `
@@ -182,6 +194,6 @@ const FormsContainer = styled.div`
         cursor: pointer;
         border: none;
         border-radius: 5px;
-        margin: 50px 5px 0 75px;       
+        margin: 25px 5px 10px 60px;       
     }
 `
