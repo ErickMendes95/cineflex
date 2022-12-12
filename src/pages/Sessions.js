@@ -4,11 +4,10 @@ import { Link, useParams } from "react-router-dom"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 
-export default function Sessions({setImage, setTitle, setWeekday, setSessionTime}){
+export default function Sessions(){
 
     const [filmSessions, setFilmSessions] = useState(undefined)
     const { idFilm } = useParams()
-    console.log(filmSessions)
     
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilm}/showtimes`)
@@ -17,30 +16,6 @@ export default function Sessions({setImage, setTitle, setWeekday, setSessionTime
 
     if(filmSessions === undefined){
         return <div>Carregando...</div>
-    }
-
-    function setParams(e){
-        setImage(filmSessions.posterURL)
-        setTitle(filmSessions.title)
-        setSessionTime(e.target.value)
-        console.log(e.target.id)
-        if(e.target.id === "1" || e.target.id === "9"){
-            setWeekday("Domingo");
-        } else if(e.target.id === "2" || e.target.id === "10"){
-            setWeekday("Segunda-Feira")
-        } else if(e.target.id === "3" || e.target.id === "11"){
-            setWeekday("Terça-Feira")
-        } else if(e.target.id === "4" || e.target.id === "12"){
-            setWeekday("Quarta-Feira")
-        } else if(e.target.id === "5" || e.target.id === "13"){
-            setWeekday("Quinta-Feira")
-        } else if(e.target.id === "6" || e.target.id === "14"){
-            setWeekday("Sexta-Feira")
-        } else if(e.target.id === "7" || e.target.id === "15"){
-            setWeekday("Sábado")
-        } else if(e.target.id === "8" || e.target.id === "16"){
-            setWeekday("Domingo")
-        }
     }
     
     return (
@@ -55,8 +30,8 @@ export default function Sessions({setImage, setTitle, setWeekday, setSessionTime
                     </Text>
                     <Buttons>
                         {d.showtimes.map((ds) => 
-                            <Link to={`/seats/${d.id}`}>
-                                 <button id={index + 1} value={ds.name} onClick={(event) => setParams(event)}>{ds.name}</button>
+                            <Link to={`/seats/${ds.id}`}>
+                                 <button id={ds.id} value={ds.name}>{ds.name}</button>
                             </Link>
                         )}
                         </Buttons>

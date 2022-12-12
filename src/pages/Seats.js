@@ -1,15 +1,35 @@
-import { Link, useParams } from "react-router-dom"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 
-export default function Seats({image, title, weekday, sessionTime}){
-    console.log()
-    const numberSeats = []
-    for(let i=1;i<51;i++){
-        numberSeats.push(i)
+export default function Seats(){
+    
+    const [infoSession, setInfoSession] = useState(undefined)
+    const { idSession } = useParams()
+    
+    useEffect(() => {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSession}/seats`)
+        promise.then(res => setInfoSession(res.data))
+
+    },[])
+
+    if(infoSession === undefined){
+        return <div>Carregando...</div>
+    }
+    
+    function buttonSelector(e){
+        console.log(e.target)
+        if(e.target.value === "false"){
+            alert("Esse assento não está disponível")
+        }
+        
     }
 
-    const { idSessions} = useParams()
+    function buySeats(e){
+        e.preventDefault();
+    }
 
     return(
         <Container>
@@ -17,8 +37,12 @@ export default function Seats({image, title, weekday, sessionTime}){
                 <h1>Selecione o(s) assento(s)</h1>
             </Text>
             <SeatsContainer>
-                {numberSeats.map((s, index) => 
-                    <button>{index + 1}</button>
+                {infoSession.seats.map((s) => 
+                    <Button key={s.id} id={s.id} isAvailable={!(s.isAvailable)}>
+                        <button value={s.isAvailable} onClick={(e) => buttonSelector(e)}>
+                            {s.name}
+                        </button>
+                    </Button>
                     )}
             </SeatsContainer>
             <LegendsContainer>
@@ -36,7 +60,7 @@ export default function Seats({image, title, weekday, sessionTime}){
                     </Legend>
             </LegendsContainer>
             <FormsContainer>
-                <form>
+                <form onSubmit={buySeats}>
                     <label>
                         <h1>NOME DO COMPRADOR</h1>
                         <input type="text" name="nome" placeholder="Digite seu nome.."></input>
@@ -48,7 +72,7 @@ export default function Seats({image, title, weekday, sessionTime}){
                     <button>Reservar assento(s)</button>
                 </form>
             </FormsContainer>
-            <Footer image={image} title={title} weekday={weekday} sessionTime={sessionTime}/>
+            <Footer image={infoSession.movie.posterURL} title={infoSession.movie.title} weekday={infoSession.day.weekday} sessionTime={infoSession.name}/>
         </Container>
     )
 }
@@ -87,6 +111,13 @@ const SeatsContainer = styled.div`
         border: 1px solid #808F9D;
         font-size: 12px;
         cursor: pointer;
+    }
+`
+
+const Button = styled.div`
+    button{
+    color: black;
+    background: ${props => props.isAvailable ? '#FBE192' : '#C3CFD9'};
     }
 `
 

@@ -1,14 +1,13 @@
-import { useState } from "react"
 import styled from "styled-components"
 
-export default function Footer({title, sessionTime, image, weekday}){
+export default function Footer({title, sessionTime, image, weekday, hifen}){
 
     return(
         <FooterContainer>
             <img src={image} alt="#"/>
             <Text>
             <h1>{title}</h1>
-            <h1>{weekday} - {sessionTime}</h1>
+            <h1>{weekday} {hifen} {sessionTime}</h1>
             </Text>
 
         </FooterContainer>
