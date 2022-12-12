@@ -1,12 +1,16 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 
-export default function Seats({arraySeats, setArraySeats}){
+export default function Seats(){
+
+    const [arraySeats, setArraySeats] = useState([])
+    const [arrayValueSeats, setArrayValueSeats]= useState([])
     let navigate = useNavigate();
-    let index = "";
+    const [name, setName] = useState()
+    const [cpf, setCpf] = useState()
 
     const [infoSession, setInfoSession] = useState(undefined)
     const { idSession } = useParams()
@@ -28,12 +32,15 @@ export default function Seats({arraySeats, setArraySeats}){
         if(e.target.value === "true"){
             if(!(arraySeats.includes(e.target.id))){
                 setArraySeats([...arraySeats, e.target.id])
-                console.log(arraySeats)
+                setArrayValueSeats([...arrayValueSeats, e.target.name])
+                e.target.style.background = "#1AAE9E";
             } else if(arraySeats.includes(e.target.id)) {
-                index = arraySeats.indexOf(e.target.id)
-                console.log(index)
-                
-                
+                let filteredArray = arraySeats.filter((item) => item !== e.target.id)
+                setArraySeats(filteredArray)
+                let filteredValueArray = arrayValueSeats.filter((item) => item !== e.target.name)
+                setArraySeats(filteredValueArray)
+                e.target.style.background = "#C3CFD9";
+
             }
 
 
@@ -42,6 +49,22 @@ export default function Seats({arraySeats, setArraySeats}){
 
     function buySeats(e){
         e.preventDefault();
+
+        const requisition = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", {
+           ids: arraySeats,
+           name: name,
+           cpf: cpf
+
+        });
+
+        navigate("/success", {state:{
+            seats: arrayValueSeats,
+            name: name,
+            cpf: cpf,
+            infoSession: infoSession,
+    }})
+
+
     }
 
     return(
@@ -76,11 +99,11 @@ export default function Seats({arraySeats, setArraySeats}){
                 <form onSubmit={buySeats}>
                     <label>
                         <h1>NOME DO COMPRADOR</h1>
-                        <input type="text" name="nome" placeholder="Digite seu nome.."></input>
+                        <input type="text" name="nome" placeholder="Digite seu nome.." onChange={(e) => setName(e.target.value)} required></input>
                     </label>
                     <label>
                         <h1>CPF DO COMPRADOR</h1>
-                        <input type="text" name="cpf" placeholder="Digite seu cpf.." pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})|(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})"></input>
+                        <input type="text" name="cpf" placeholder="Digite seu cpf.." onChange={(e) => setCpf(e.target.value)} required pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})|(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})"></input>
                     </label>
                     <button>Reservar assento(s)</button>
                 </form>

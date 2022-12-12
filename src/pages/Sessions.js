@@ -34,10 +34,9 @@ export default function Sessions(){
                                  <button id={ds.id} value={ds.name}>{ds.name}</button>
                             </Link>
                         )}
-                        </Buttons>
+                    </Buttons>
                  </Session>
             )}
-            
             <Footer image={filmSessions.posterURL} title={filmSessions.title}/>
         </Container>)
 }
@@ -70,10 +69,10 @@ const Session = styled.div`
     flex-direction: column;
     width: 100%;
     margin-left: 50px;
-
 `
 
 const Buttons = styled.div`
+    margin-bottom: 5px;
     button {
         font-size: 18px;
         color: #fff;

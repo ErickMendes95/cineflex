@@ -8,7 +8,6 @@ import GlobalStyle from "../globalStyles"
 import { useState } from "react";
 
 function App() {
-  const [arraySeats, setArraySeats] = useState([])
   
   return (
     <BrowserRouter>
@@ -17,8 +16,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Films/>}/>
       <Route path="/sessions/:idFilm" element={<Sessions/>}/>
-      <Route path="/seats/:idSession" element={<Seats arraySeats={arraySeats} setArraySeats={setArraySeats} />}/>
-      <Route path="/success" element={<Success />}/>
+      <Route path="/seats/:idSession" element={<Seats />}/>
+      <Route path="/success/" element={<Success />}/>
     </Routes>
     </BrowserRouter>
   )

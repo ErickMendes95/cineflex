@@ -55,7 +55,7 @@ const Image = styled.div`
     img{
         width: 129px;
         height: 193px;
-        margin-left: 55px;
+        margin-left: 40px;
         margin-bottom: 25px;
         cursor: pointer;
     }

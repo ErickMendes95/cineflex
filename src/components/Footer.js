@@ -16,6 +16,7 @@ export default function Footer({title, sessionTime, image, weekday, hifen}){
 
 const FooterContainer = styled.div`
 display: flex;
+margin-top: 20px;
 height: 117px;
 font-weight: 400;
 font-size: 34px;
