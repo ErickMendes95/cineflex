@@ -4,8 +4,13 @@ import Seats from "../pages/Seats";
 import Sessions from "../pages/Sessions";
 import NavBar from "./NavBar"
 import GlobalStyle from "../globalStyles"
+import { useState } from "react";
 
 function App() {
+  const [weekday, setWeekday] = useState("")
+  const [sessionTime, setSessionTime] = useState("")
+  const [image, setImage] = useState()
+  const [title, setTitle] = useState()
     
   return (
     <BrowserRouter>
@@ -13,10 +18,9 @@ function App() {
     <NavBar/>
     <Routes>
       <Route path="/" element={<Films/>}/>
-      <Route path="/sessions/:idFilm" element={<Sessions/>}/>
-      {/* :idFilm */}
-      {/* :idSession */}
-      <Route path="/seats/" element={<Seats/>}/>
+      <Route path="/sessions/:idFilm" element={<Sessions setWeekday={setWeekday} 
+      setSessionTime={setSessionTime} setImage={setImage} setTitle={setTitle}/>}/>
+      <Route path="/seats/:idSession" element={<Seats image={image} title={title} weekday={weekday} sessionTime={sessionTime}/>}/>
 
     </Routes>
     </BrowserRouter>

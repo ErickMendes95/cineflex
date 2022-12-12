@@ -1,11 +1,16 @@
+import { Link, useParams } from "react-router-dom"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 
-export default function Seats(){
+export default function Seats({image, title, weekday, sessionTime}){
+    console.log()
     const numberSeats = []
     for(let i=1;i<51;i++){
         numberSeats.push(i)
     }
+
+    const { idSessions} = useParams()
+
     return(
         <Container>
             <Text>
@@ -43,7 +48,7 @@ export default function Seats(){
                     <button>Reservar assento(s)</button>
                 </form>
             </FormsContainer>
-            <Footer/>
+            <Footer image={image} title={title} weekday={weekday} sessionTime={sessionTime}/>
         </Container>
     )
 }
