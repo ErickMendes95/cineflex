@@ -14,21 +14,21 @@ export default function Success({route, navigate}){
             <Confirmation>
                 <h1>Pedido feito<br/> com sucesso!</h1>
             </Confirmation>
-            <Text>
+            <Text data-test="movie-info">
                 <h1>Filme e sessão</h1>
                 <p>{info2.movie.title}</p>
                 <p>{info2.day.date} {info2.name}</p>
             </Text>
-            <Text>
+            <Text data-test="seats-info">
                 <h1>Ingressos</h1>
                 {info.seats.map((s) => <p>Assento {s}</p>)}
             </Text>
-            <Text>
+            <Text data-test="client-info">
                 <h1>Comprador</h1>
                 <p>Nome: {info.name}</p>
                 <p>CPF: {info.cpf}</p>
             </Text>
-            <Link to="/">
+            <Link to="/" data-test="go-home-btn">
                 <Button>
                     <button>Voltar pra Home</button>
                 </Button>

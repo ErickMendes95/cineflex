@@ -24,7 +24,7 @@ export default function Films(){
             <Image>
                 {films.map(f => 
                 <Link to={`/sessions/${f.id}`}>
-                    <img src={f.posterURL} alt={f.title}/>
+                    <img data-test="movie" src={f.posterURL} alt={f.title}/>
                 </Link>
                     )}
             </Image>

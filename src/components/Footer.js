@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function Footer({title, sessionTime, image, weekday, hifen}){
 
     return(
-        <FooterContainer>
+        <FooterContainer data-test="footer">
             <img src={image} alt="#"/>
             <Text>
             <h1>{title}</h1>

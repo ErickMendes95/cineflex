@@ -75,7 +75,7 @@ export default function Seats(){
             <SeatsContainer>
                 {infoSession.seats.map((s) => 
                     <Button key={s.id}  isAvailable={!(s.isAvailable)}>
-                        <button  id={s.id} name={s.name} value={s.isAvailable} onClick={(e) => buttonSelector(e)}>
+                        <button data-test="seat" id={s.id} name={s.name} value={s.isAvailable} onClick={(e) => buttonSelector(e)}>
                             {s.name}
                         </button>
                     </Button>
@@ -99,13 +99,13 @@ export default function Seats(){
                 <form onSubmit={buySeats}>
                     <label>
                         <h1>NOME DO COMPRADOR</h1>
-                        <input type="text" name="nome" placeholder="Digite seu nome.." onChange={(e) => setName(e.target.value)} required></input>
+                        <input data-test="client-name" type="text" name="nome" placeholder="Digite seu nome.." onChange={(e) => setName(e.target.value)} required></input>
                     </label>
                     <label>
                         <h1>CPF DO COMPRADOR</h1>
-                        <input type="text" name="cpf" placeholder="Digite seu cpf.." onChange={(e) => setCpf(e.target.value)} required pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})|(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})"></input>
+                        <input data-test="client-cpf" type="text" name="cpf" placeholder="Digite seu cpf.." onChange={(e) => setCpf(e.target.value)} required pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})|(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})"></input>
                     </label>
-                    <button>Reservar assento(s)</button>
+                    <button data-test="book-seat-btn">Reservar assento(s)</button>
                 </form>
             </FormsContainer>
             <Footer image={infoSession.movie.posterURL} title={infoSession.movie.title} weekday={infoSession.day.weekday} sessionTime={infoSession.name}/>

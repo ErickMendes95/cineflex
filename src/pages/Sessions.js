@@ -24,14 +24,14 @@ export default function Sessions(){
                 <h1>Selecione a Sessão</h1>
             </Text>
             {filmSessions.days.map((d, index) => 
-                <Session>
+                <Session data-test="movie-day">
                     <Text>
                         <p>{d.weekday} - {d.date}</p>
                     </Text>
                     <Buttons>
                         {d.showtimes.map((ds) => 
                             <Link to={`/seats/${ds.id}`}>
-                                 <button id={ds.id} value={ds.name}>{ds.name}</button>
+                                 <button data-test="showtime" id={ds.id} value={ds.name}>{ds.name}</button>
                             </Link>
                         )}
                     </Buttons>
