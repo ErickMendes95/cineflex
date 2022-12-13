@@ -15,9 +15,9 @@ function App() {
     <NavBar/>
     <Routes>
       <Route path="/" element={<Films/>}/>
-      <Route path="/sessions/:idFilm" element={<Sessions/>}/>
-      <Route path="/seats/:idSession" element={<Seats />}/>
-      <Route path="/success/" element={<Success />}/>
+      <Route path="/sessoes/:idFilm" element={<Sessions/>}/>
+      <Route path="/assentos/:idSession" element={<Seats />}/>
+      <Route path="/sucesso/" element={<Success />}/>
     </Routes>
     </BrowserRouter>
   )

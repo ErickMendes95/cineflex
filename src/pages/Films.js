@@ -23,7 +23,7 @@ export default function Films(){
             </Text>
             <Image>
                 {films.map(f => 
-                <Link to={`/sessions/${f.id}`} data-test="movie">
+                <Link to={`/sessoes/${f.id}`} data-test="movie">
                     <img src={f.posterURL} alt={f.title}/>
                 </Link>
                     )}

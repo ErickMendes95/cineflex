@@ -30,7 +30,7 @@ export default function Sessions(){
                     </Text>
                     <Buttons>
                         {d.showtimes.map((ds) => 
-                            <Link to={`/seats/${ds.id}`}>
+                            <Link to={`/assentos/${ds.id}`}>
                                  <button data-test="showtime" id={ds.id} value={ds.name}>{ds.name}</button>
                             </Link>
                         )}

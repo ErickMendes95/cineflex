@@ -57,7 +57,7 @@ export default function Seats(){
 
         });
 
-        navigate("/success", {state:{
+        navigate("/sucesso", {state:{
             seats: arrayValueSeats,
             name: name,
             cpf: cpf,
